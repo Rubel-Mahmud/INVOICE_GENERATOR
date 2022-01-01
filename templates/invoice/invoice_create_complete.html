@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ block.super }} - New Invoice
+{% endblock title %}
+
+{% block mainContent %}
+
+<h1 class="mt-4">New Invoice</h1>
+
+<div class="container">
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {{ invform.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
+
+<h2>Add Product To Invoice</h2>
+<form method="POST" novalidate>
+    {% csrf_token %}
+    {{ prdform.as_p }}
+    <button type="submit" class="btn btn-success">Add</button>
+</form>
+
+{% endblock mainContent %}

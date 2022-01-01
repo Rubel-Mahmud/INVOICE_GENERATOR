@@ -91,7 +91,7 @@ class Invoice(models.Model):
 
 
     def __str__(self):
-        return "{} : {}-{}".format(self.number, self.title, self.client.name)
+        return self.number
 
 
 
