@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ block.super }} - Clients
+{% endblock title %}
+
+{% block mainContent %}
+
+<h1 class="mt-4">Clients</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">All of your clients will get here.</li>
+</ol>
+
+<!--Data Table list Example start from here-->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-user-tie me-1"></i>
+        Available Clients
+    </div>
+
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Postal Code</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Logo</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Postal Code</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Logo</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.addressLine1 }}</td>
+                    <td>{{ client.postalCode }}</td>
+                    <td>{{ client.phoneNumber }}</td>
+                    <td>{{ client.email }}</td>
+                    <td><img src="/{{ client.clientLogo }}" alt="Logo-{{ client.name }}"></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock mainContent %}

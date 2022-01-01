@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ block.super }} - Products
+{% endblock title %}
+
+{% block mainContent %}
+
+<h1 class="mt-4">Products</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">All of your products will get here.</li>
+</ol>
+
+<!--Data Table list Example start from here-->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-shopping-cart"></i>
+        Available Products
+    </div>
+
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Currency</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Currency</th>
+                    <th>Image</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.currency }}</td>
+                    <td><img src="/{{ product.image }}" alt="Logo-{{ product.title }}"></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock mainContent %}

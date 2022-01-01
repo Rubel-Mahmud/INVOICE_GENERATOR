@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block title %}{{block.super}} - Home{% endblock title %}
+
+
+{% block mainContent %}
+
+<h1 class="mt-4">Dashboard</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+
+<div class="row">
+    <!--custom bg-color-->
+    <div class="d-flex">
+        <div class="col-xl-3 col-md-6">
+            <a href="#" class="text-decoration-none">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body d-flex align-items-center justify-content-between">Paid Invoices
+                        <div class="small text-white"><i class="fas fa-angle-down"></i></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <a href="#" class="text-decoration-none">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body d-flex align-items-center justify-content-between">Due Invoices
+                        <div class="small text-white"><i class="fas fa-angle-down"></i></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <a href="#" class="text-decoration-none">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body d-flex align-items-center justify-content-between">Current Invoices
+                        <div class="small text-white"><i class="fas fa-angle-down"></i></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <a href="#" class="text-decoration-none">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body d-flex align-items-center justify-content-between">OverDue Invoices
+                        <div class="small text-white"><i class="fas fa-angle-down"></i></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+     <!--Custom bg color end-->
+</div>
+
+<!--Data Table list Example start from here-->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-clipboard-list me-1"></i>
+        Available Invoices
+    </div>
+
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>INV</th>
+                    <th>Invoice Title</th>
+                    <th>Client</th>
+                    <th>Province</th>
+                    <th>Due date</th>
+                    <th>Invoice Totall</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>INV</th>
+                    <th>Invoice Title</th>
+                    <th>Client</th>
+                    <th>Province</th>
+                    <th>Due date</th>
+                    <th>Invoice Totall</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Ilma</td>
+                    <td>Dhaka</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Rubel</td>
+                    <td>Rangpur</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Ilma</td>
+                    <td>Dhaka</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Rubel</td>
+                    <td>Rangpur</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Ilma</td>
+                    <td>Dhaka</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Ilma</td>
+                    <td>Dhaka</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Rubel</td>
+                    <td>Rangpur</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Ilma</td>
+                    <td>Dhaka</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Rubel</td>
+                    <td>Rangpur</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+
+                <tr>
+                    <td>INV-0A-01245</td>
+                    <td>Test Invoice</td>
+                    <td>Ilma</td>
+                    <td>Dhaka</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock mainContent %}
