@@ -8,8 +8,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>{% block title %}Invoice Generator{% endblock title %}</title>
-      <!--  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-      -->  <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <!--<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    --> <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 
         <!--This block will extend child template for extra css files-->
         {% block stylesheet %}{% endblock stylesheet %}
@@ -84,30 +84,15 @@
                             </div>
 
 
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInvoices" aria-expanded="false" aria-controls="collapsePages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsInvoices" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                                 Invoices
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseInvoices" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Create Invoice
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Available Invoices
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                        </nav>
-                                    </div>
+                            <div class="collapse" id="collapseLayoutsInvoices" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'create_invoice' %}">Create Invoice</a>
+                                    <a class="nav-link" href="{% url 'invoices' %}">Available Invoices</a>
                                 </nav>
                             </div>
 
@@ -165,7 +150,10 @@ This link is for table data design and listing
         <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
 
         <!--This block will extends child template for extra javascript files-->
-        {% block script %}{% endblock script %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         {% block script %}
+        {% endblock script %}
+
     {% endblock body %}
     </body>
 </html>

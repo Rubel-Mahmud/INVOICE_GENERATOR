@@ -71,9 +71,9 @@
                     <th>INV</th>
                     <th>Invoice Title</th>
                     <th>Client</th>
-                    <th>Province</th>
                     <th>Due date</th>
                     <th>Invoice Totall</th>
+                    <th>Payment Status</th>
                 </tr>
             </thead>
             <tfoot>
@@ -81,101 +81,22 @@
                     <th>INV</th>
                     <th>Invoice Title</th>
                     <th>Client</th>
-                    <th>Province</th>
                     <th>Due date</th>
                     <th>Invoice Totall</th>
+                    <th>Payment Status</th>
                 </tr>
             </tfoot>
             <tbody>
+                {% for invoice in invoices %}
                 <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Ilma</td>
-                    <td>Dhaka</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
+                    <td>{{ invoice.number }}</td>
+                    <td>{{ invoice.invoiceTitle }}</td>
+                    <td>{{ invoice.client.name }}</td>
+                    <td>{{ invoice.dueDate }}</td>
+                    <td>{{ invoice.invoiceTotal }} Tk</td>
+                    <td>{{ invoice.paymentStatus }}</td>
                 </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Rubel</td>
-                    <td>Rangpur</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Ilma</td>
-                    <td>Dhaka</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Rubel</td>
-                    <td>Rangpur</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Ilma</td>
-                    <td>Dhaka</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Ilma</td>
-                    <td>Dhaka</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Rubel</td>
-                    <td>Rangpur</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Ilma</td>
-                    <td>Dhaka</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Rubel</td>
-                    <td>Rangpur</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-
-                <tr>
-                    <td>INV-0A-01245</td>
-                    <td>Test Invoice</td>
-                    <td>Ilma</td>
-                    <td>Dhaka</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

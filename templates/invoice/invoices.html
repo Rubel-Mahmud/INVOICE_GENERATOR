@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}{{block.super}} - Invoices{% endblock title %}
+
+
+{% block mainContent %}
+
+<h1 class="mt-4">Invoices</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">All invoices will found here.</li>
+</ol>
+
+<!--Data Table list Example start from here-->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-clipboard-list me-1"></i>
+        Available Invoices
+    </div>
+
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>INV</th>
+                    <th>Invoice Title</th>
+                    <th>Client</th>
+                    <th>Due date</th>
+                    <th>Invoice Totall</th>
+                    <th>Status</th>
+                    <th>
+                        <div class="d-flex justify-content-center">
+                            Actions
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>INV</th>
+                    <th>Invoice Title</th>
+                    <th>Client</th>
+                    <th>Due date</th>
+                    <th>Invoice Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for invoice in invoices %}
+                <tr>
+                    <td>{{ invoice.number }}</td>
+                    <td>{{ invoice.invoiceTitle }}</td>
+                    <td>{{ invoice.client.name }}</td>
+                    <td>{{ invoice.dueDate }}</td>
+                    <td>{{ invoice.invoiceTotal }} Tk</td>
+                    <td>{{ invoice.paymentStatus }}</td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a href="{% url 'delete_invoice' invoice.id %}">
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                            &nbsp;&nbsp;
+                            <a href="{% url 'invoice_details' invoice.id %}">
+                                <button type="button" class="btn btn-success">View</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock mainContent %}

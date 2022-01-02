@@ -23,32 +23,42 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Currency</th>
+                    <th>Description</th>
                     <th>Image</th>
+                    <th>
+                        <div class="d-flex justify-content-center">
+                            Action
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Currency</th>
+                    <th>Description</th>
                     <th>Image</th>
+                    <th class="d-flex justify-content-center">Action</th>
                 </tr>
             </tfoot>
             <tbody>
             {% for product in products %}
                 <tr>
-                    <td>{{ product.title }}</td>
-                    <td>{{ product.description }}</td>
+                    <td>{{ product.productTitle }}</td>
                     <td>{{ product.quantity }}</td>
                     <td>{{ product.price }}</td>
-                    <td>{{ product.currency }}</td>
-                    <td><img src="/{{ product.image }}" alt="Logo-{{ product.title }}"></td>
+                    <td>{{ product.description }}</td>
+                    <td><img src="#" alt="Logo-{{ product.title }}"></td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a href="{% url 'delete_product' product.id %}">
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

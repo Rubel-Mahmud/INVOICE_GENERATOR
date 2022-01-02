@@ -12,15 +12,20 @@
     <form method="POST" novalidate>
         {% csrf_token %}
         {{ invform.as_p }}
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" name="invoice" class="btn btn-success">Save</button>
     </form>
 </div>
 
 <h2>Add Product To Invoice</h2>
+
 <form method="POST" novalidate>
     {% csrf_token %}
     {{ prdform.as_p }}
-    <button type="submit" class="btn btn-success">Add</button>
+    <button type="submit" name="product" class="btn btn-success">Add</button>
 </form>
+
+<!--This block is used for modal jquery scripts-->
+{% block script %}
+{% endblock script %}
 
 {% endblock mainContent %}

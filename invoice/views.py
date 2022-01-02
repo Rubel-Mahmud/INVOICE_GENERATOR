@@ -1,12 +1,15 @@
 from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from uuid import uuid4
 from .models import Client, Product, Invoice
 from .forms import ClientCreationForm, InvoiceCreationForm, ProductCreationForm
 
 
 def home(request):
-    return render(request, 'invoice/home.html')
+    context = {}
+    invoices = Invoice.objects.all().order_by('-last_updated')
+    context['invoices'] = invoices
+    return render(request, 'invoice/home.html', context)
 
 
 def clients(request):
@@ -38,6 +41,36 @@ def products(request):
 
 
 
+def deleteProduct(request, id):
+    product = get_object_or_404(Product, pk=id)
+    product.delete()
+    return redirect('products')
+
+
+
+def invoices(request):
+    context = {}
+    invoices = Invoice.objects.all().order_by('-last_updated')
+    context['invoices'] = invoices
+    return render(request, 'invoice/invoices.html', context)
+
+
+
+
+def invoiceDetails(request, id):
+    invoice = get_object_or_404(Invoice, pk=id)
+    slug = invoice.uniqueId
+    return redirect('create_invoice_complete', slug)
+
+
+
+def deleteInvoice(request, id):
+    invoice = get_object_or_404(Invoice, pk=id)
+    invoice.delete()
+    return redirect('invoices')
+
+
+
 def createInvoice(request):
     number = 'INV-' + str(uuid4()).split('-')[1]
     inv = Invoice.objects.create(number=number)
@@ -49,20 +82,23 @@ def createInvoice(request):
 
 def createInvoiceComplete(request, slug):
     context = {}
+    invoiceTotal = 0
     invoice = Invoice.objects.get(uniqueId=slug)
 
     if request.method == 'POST':
         invform = InvoiceCreationForm(request.POST, instance=invoice)
         prdform = ProductCreationForm(request.POST)
 
-        if prdform.is_valid():
+        if 'product' in request.POST and prdform.is_valid():
             product = prdform.save()
-            return redirect('create_invoice_complete', slug)
-
-        if invform.is_valid():
-            invoice = invform.save(commit=False)
+            invoiceTotal += int(product.quantity) * int(product.price)
+            invoice.invoiceTotal = invoiceTotal
             invoice.product = product
             invoice.save()
+            return redirect('create_invoice_complete', slug)
+
+        if 'invoice' in request.POST and invform.is_valid():
+            invform.save()
             return redirect('create_invoice_complete', slug)
 
     else:

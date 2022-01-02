@@ -41,7 +41,7 @@ class Product(models.Model):
         ('EUR', 'Eur'),
     ]
 
-    title = models.CharField(max_length=200, null=True, blank=True)
+    productTitle = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     quantity = models.CharField(max_length=200, null=True, blank=True)
     price = models.CharField(max_length=200, null=True, blank=True)
@@ -54,7 +54,7 @@ class Product(models.Model):
 
 
     def __str__(self):
-        return "{} : {}{}".format(self.title, self.price, self.currency)
+        return "{} : {}{}".format(self.productTitle, self.price, self.currency)
 
 
     def save(self, *args, **kwargs):
@@ -76,13 +76,14 @@ class Invoice(models.Model):
     ]
 
     number = models.CharField(max_length=100, null=True, blank=True)
-    title = models.CharField(max_length=200, null=True, blank=True)
+    invoiceTitle = models.CharField(max_length=200, null=True, blank=True)
     dueDate = models.DateTimeField(null=True, blank=True)
+    invoiceTotal = models.PositiveIntegerField(default=0, null=True, blank=True)
     paymentStatus = models.CharField(choices=STATUS, max_length=100, null=True, blank=True)
 
     # Related Fields
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, blank=True, related_name='invoices')
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
 
     # Utility Fields
     uniqueId = models.CharField(max_length=200, null=True, blank=True)
@@ -98,6 +99,8 @@ class Invoice(models.Model):
     def save(self, *args, **kwargs):
         if self.created_at == None:
             self.created_at = timezone.now()
+
+        self.last_updated = timezone.now()
 
         super(Invoice, self).save(*args, **kwargs)
 

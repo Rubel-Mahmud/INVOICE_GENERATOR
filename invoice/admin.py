@@ -7,11 +7,11 @@ class ClientAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'quantity', 'price')
+    list_display = ('productTitle', 'quantity', 'price')
 
 
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ('number', 'title', 'paymentStatus')
+    list_display = ('number', 'invoiceTitle', 'paymentStatus')
 
 
 admin.site.register(Client, ClientAdmin)

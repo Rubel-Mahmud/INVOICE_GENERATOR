@@ -14,7 +14,7 @@ class InvoiceCreationForm(forms.ModelForm):
 
     class Meta:
         model = Invoice
-        fields = ('number', 'title', 'dueDate', 'paymentStatus', 'client')
+        fields = ('number', 'invoiceTitle', 'dueDate', 'paymentStatus', 'client')
 
 
 
@@ -22,4 +22,4 @@ class ProductCreationForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ('title', 'description', 'quantity', 'price', 'currency')
+        fields = ('productTitle', 'description', 'quantity', 'price', 'currency')
