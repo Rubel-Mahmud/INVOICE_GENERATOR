@@ -43,8 +43,9 @@ def products(request):
 
 def deleteProduct(request, id):
     product = get_object_or_404(Product, pk=id)
+    slug = product.invoice.uniqueId
     product.delete()
-    return redirect('products')
+    return redirect('create_invoice_complete', slug)
 
 
 
@@ -84,26 +85,35 @@ def createInvoiceComplete(request, slug):
     context = {}
     invoiceTotal = 0
     invoice = Invoice.objects.get(uniqueId=slug)
+    products = invoice.products.all().order_by('-created_at')
+    context['products'] = products
 
     if request.method == 'POST':
         invform = InvoiceCreationForm(request.POST, instance=invoice)
         prdform = ProductCreationForm(request.POST)
 
-        if 'product' in request.POST and prdform.is_valid():
-            product = prdform.save()
+        if 'productSubmitButton' in request.POST and prdform.is_valid():
+            product = prdform.save(commit=False)
+            product.invoice = invoice
+            product.save()
             invoiceTotal += int(product.quantity) * int(product.price)
             invoice.invoiceTotal = invoiceTotal
-            invoice.product = product
             invoice.save()
             return redirect('create_invoice_complete', slug)
 
-        if 'invoice' in request.POST and invform.is_valid():
+        if 'invoiceSubmitButton' in request.POST and invform.is_valid():
             invform.save()
             return redirect('create_invoice_complete', slug)
 
     else:
         invform = InvoiceCreationForm(instance=invoice)
         prdform = ProductCreationForm()
+        context['invoice'] = invoice
         context['invform'] = invform
         context['prdform'] =prdform
         return render(request, 'invoice/invoice_create_complete.html', context=context)
+
+
+
+def invoiceTemplate(request, slug):
+    return render(request, 'invoice/invoice_template.html')

@@ -19,6 +19,10 @@ class InvoiceCreationForm(forms.ModelForm):
 
 
 class ProductCreationForm(forms.ModelForm):
+    description = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5, 'placeholder': 'Products Description'}),
+        max_length=4000
+    )
 
     class Meta:
         model = Product

@@ -54,8 +54,8 @@
                     <td><img src="#" alt="Logo-{{ product.title }}"></td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            <a href="{% url 'delete_product' product.id %}">
-                                <button type="button" class="btn btn-danger">Delete</button>
+                            <a href="{% url 'create_invoice_complete' product.invoice.uniqueId %}">
+                                <button type="button" class="btn btn-primary">Invoice</button>
                             </a>
                         </div>
                     </td>
