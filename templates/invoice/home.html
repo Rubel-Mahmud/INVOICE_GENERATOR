@@ -73,7 +73,7 @@
                     <th>Client</th>
                     <th>Due date</th>
                     <th>Invoice Totall</th>
-                    <th>Payment Status</th>
+                    <th class="text-center">Payment Status</th>
                 </tr>
             </thead>
             <tfoot>
@@ -94,7 +94,11 @@
                     <td>{{ invoice.client.name }}</td>
                     <td>{{ invoice.dueDate }}</td>
                     <td>{{ invoice.invoiceTotal }} Tk</td>
-                    <td>{{ invoice.paymentStatus }}</td>
+                    <td class="text-center">{{ invoice.paymentStatus }}
+                        <a style="text-decoration:None;" href="{% url 'create_invoice_complete' invoice.uniqueId %}">
+                            (<span class="badge rounded-pill bg-warning text-dark">VIEW</span>)
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

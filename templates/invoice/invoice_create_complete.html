@@ -174,7 +174,7 @@
                                 <th>Quantity</th>
                                 <th>Price</th>
                                 <th>Description</th>
-                                <th>Image</th>
+                                <th class="text-center">Image</th>
                                 <th>
                                     <div class="d-flex justify-content-center">
                                         Action
@@ -188,7 +188,7 @@
                                 <th>Quantity</th>
                                 <th>Price</th>
                                 <th>Description</th>
-                                <th>Image</th>
+                                <th class="text-center">Image</th>
                                 <th class="d-flex justify-content-center">Action</th>
                             </tr>
                         </tfoot>
@@ -199,7 +199,7 @@
                                 <td>{{ product.quantity }}</td>
                                 <td>{{ product.price }}</td>
                                 <td>{{ product.description }}</td>
-                                <td><img src="#" alt="Logo-{{ product.title }}"></td>
+                                <td class="text-center"><img width="60px" height="60px" src="{{ product.image.url }}" alt="Logo-{{ product.title }}"></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <a href="{% url 'delete_product' product.id %}">
