@@ -16,7 +16,7 @@ class Client(models.Model):
     province = models.CharField(max_length=100, choices=provinces, null=True, blank=True)
     phoneNumber = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(max_length=200, null=True, blank=True)
-    clientLogo = models.ImageField(upload_to='clientLogos/')
+    clientLogo = models.ImageField(upload_to='clientLogos/', null=True)
 
     # Utility fields
     created_at = models.DateTimeField(null=True, blank=True)

@@ -14,4 +14,5 @@ urlpatterns = [
     path('invoices/create/', views.createInvoice, name='create_invoice'),
     path('invoices/create/<slug:slug>/complete/', views.createInvoiceComplete, name='create_invoice_complete'),
     path('invoices/view/<slug:slug>/template/', views.invoiceTemplate, name='invoice_template'),
+    path('pdf/', views.createPDF, name='pdf'),
 ]

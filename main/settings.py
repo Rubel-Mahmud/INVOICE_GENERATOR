@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     # from PyPi
     'widget_tweaks',
-
+    # html to pdf convert
+    # 'wkhtmltopdf',
     # My Apps
     'invoice',
 ]
@@ -125,6 +126,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 
 # Media files path

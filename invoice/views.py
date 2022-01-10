@@ -1,6 +1,18 @@
 from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
 from uuid import uuid4
+
+# html to pdf
+from django.http import HttpResponse
+import pdfkit
+from django.template.loader import get_template
+from django.conf import settings
+import os
+# html to pdf
+
+
+
+
 from .models import Client, Product, Invoice
 from .forms import ClientCreationForm, InvoiceCreationForm, ProductCreationForm
 
@@ -83,7 +95,6 @@ def createInvoice(request):
 
 def createInvoiceComplete(request, slug):
     context = {}
-    invoiceTotal = 0
     invoice = Invoice.objects.get(uniqueId=slug)
     products = invoice.products.all().order_by('-created_at')
     context['products'] = products
@@ -96,6 +107,7 @@ def createInvoiceComplete(request, slug):
             product = prdform.save(commit=False)
             product.invoice = invoice
             product.save()
+            invoiceTotal = invoice.invoiceTotal
             invoiceTotal += int(product.quantity) * int(product.price)
             invoice.invoiceTotal = invoiceTotal
             invoice.save()
@@ -116,4 +128,56 @@ def createInvoiceComplete(request, slug):
 
 
 def invoiceTemplate(request, slug):
-    return render(request, 'invoice/invoice_template.html')
+    context = {}
+    invoice = Invoice.objects.get(uniqueId=slug)
+    context['invoice'] = invoice
+    return render(request, 'invoice/html_to_pdf_test.html', context)
+
+
+
+# html to pdf View
+def createPDF(request):
+    #The name of your PDF file
+    filename = 'first_invoice_to_ilma.pdf'
+
+    #HTML FIle to be converted to PDF - inside your Django directory
+    template = get_template('invoice/html_to_pdf_test.html')
+
+    #Add any context variables you need to be dynamically rendered in the HTML
+    context = {}
+    context['invoice'] = 'invoice'
+    # context['name'] = 'Skolo'
+    # context['surname'] = 'Online'
+
+    #Render the HTML
+    html = template.render(context)
+
+    #Options - Very Important [Don't forget this]
+    options = {
+        'encoding': 'UTF-8',
+        'javascript-delay':'2000', #Optional
+        'enable-local-file-access': None, #To be able to access CSS
+        'page-size': 'A4',
+        'custom-header' : [
+            ('Accept-Encoding', 'gzip')
+        ],
+    }
+    #Javascript delay is optional
+
+    #Remember that location to wkhtmltopdf
+    config = pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
+
+    #IF you have CSS to add to template
+    css1 = os.path.join(settings.STATIC_ROOT, 'css', 'styles.css')
+    css2 = os.path.join(settings.STATIC_ROOT, 'css', 'pdf.css')
+    # css2 = os.path.join(settings.STATIC_ROOT, 'css', 'bootstrap.css')
+
+    #Create the file
+    file_content = pdfkit.from_string(html, False, configuration=config, options=options)
+
+    #Create the HTTP Response
+    response = HttpResponse(file_content, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename = {}'.format(filename)
+
+    #Return
+    return response

@@ -27,7 +27,7 @@
                     <th>Postal Code</th>
                     <th>Mobile</th>
                     <th>Email</th>
-                    <th>Logo</th>
+                    <th class="text-center">Logo</th>
                 </tr>
             </thead>
             <tfoot>
@@ -48,7 +48,7 @@
                     <td>{{ client.postalCode }}</td>
                     <td>{{ client.phoneNumber }}</td>
                     <td>{{ client.email }}</td>
-                    <td><img src="/{{ client.clientLogo }}" alt="Logo-{{ client.name }}"></td>
+                    <td class="text-center"><img width="60px" height="60px" src="{{ client.clientLogo.url }}" alt="Logo-{{ client.name }}"></td>
                 </tr>
             {% endfor %}
             </tbody>
