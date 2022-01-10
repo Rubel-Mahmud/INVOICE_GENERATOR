@@ -2,16 +2,13 @@ from django.shortcuts import render
 from django.shortcuts import redirect, get_object_or_404
 from uuid import uuid4
 
-# html to pdf
+# html to pdf start import
 from django.http import HttpResponse
 import pdfkit
 from django.template.loader import get_template
 from django.conf import settings
 import os
-# html to pdf
-
-
-
+# html to pdf end import
 
 from .models import Client, Product, Invoice
 from .forms import ClientCreationForm, InvoiceCreationForm, ProductCreationForm

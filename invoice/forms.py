@@ -2,6 +2,10 @@ from django import forms
 from .models import Client, Invoice, Product
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class ClientCreationForm(forms.ModelForm):
 
     class Meta:
@@ -9,12 +13,14 @@ class ClientCreationForm(forms.ModelForm):
         fields = ('name', 'addressLine1', 'postalCode', 'province', 'phoneNumber', 'email')
 
 
-
 class InvoiceCreationForm(forms.ModelForm):
 
     class Meta:
         model = Invoice
         fields = ('number', 'invoiceTitle', 'dueDate', 'paymentStatus', 'client')
+        widgets = {
+            'dueDate' : DateInput(),
+        }
 
 
 
