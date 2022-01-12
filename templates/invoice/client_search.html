@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ block.super }} - Client Search
+{% endblock title %}
+
+{% block mainContent %}
+
+
+
+<!--Data Table list Example start from here-->
+
+<div class="container">
+    <h1 class="mt-4">Clients</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">All of your clients will get here.</li>
+    </ol>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col-md-auto">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                <input type="text" placeholder=" Type client name" name="searchText" style="height:40px;">
+                <button type="submit" name="search" class="btn btn-primary" style="height:40px;">Search</button>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Postal Code</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Email</th>
+          <th scope="col" class="text-center">Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if clients %}
+          {% for client in clients %}
+            <tr>
+              <th scope="row">{{ client.name }}</th>
+              <td>{{ client.addressLine1 }}</td>
+              <td>{{ client.postalCode }}</td>
+              <td>{{ client.phoneNumber }}</td>
+              <td>{{ client.email }}</td>
+              <td class="text-center">
+                  <img src="{{ client.clientLogo.url }}" alt="{{ client.name }}-logo" width="60px" height="60px">
+              </td>
+            </tr>
+          {% endfor %}
+      {% else %}
+          <small class="text-muted">No clients found</small>
+      {% endif %}
+      </tbody>
+    </table>
+</div>
+
+{% endblock mainContent %}

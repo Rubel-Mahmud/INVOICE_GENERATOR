@@ -92,7 +92,7 @@
                     <td>{{ invoice.number }}</td>
                     <td>{{ invoice.invoiceTitle }}</td>
                     <td>{{ invoice.client.name }}</td>
-                    <td>{{ invoice.dueDate }}</td>
+                    <td>{{ invoice.dueDate.date }}</td>
                     <td>{{ invoice.invoiceTotal }} Tk</td>
                     <td class="text-center">{{ invoice.paymentStatus }}
                         <a style="text-decoration:None;" href="{% url 'create_invoice_complete' invoice.uniqueId %}">

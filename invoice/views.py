@@ -42,6 +42,21 @@ def createClient(request):
 
 
 
+def clientSearch(request):
+    queryset = {}
+    if request.method == "POST":
+        inputData = request.POST['searchText']
+        clients = Client.objects.filter(name__contains=inputData)
+        if bool(clients) == False :
+            clients = Client.objects.filter(addressLine1__contains=inputData)
+        queryset['clients'] = clients
+    else:
+        clients = Client.objects.all()
+        queryset['clients'] = clients
+    return render(request, 'invoice/client_search.html', queryset)
+
+
+
 def products(request):
     context = {}
     products = Product.objects.all().order_by('-created_at')
