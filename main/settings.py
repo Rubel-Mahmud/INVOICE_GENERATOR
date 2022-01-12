@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # django forms design
+    'crispy_forms',
     # from PyPi
     'widget_tweaks',
     # html to pdf convert
@@ -45,6 +47,10 @@ INSTALLED_APPS = [
     # My Apps
     'invoice',
 ]
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -7,14 +7,21 @@
 
 {% block mainContent %}
 <div class="container">
-    <br>
-    <h2>Create New Client</h2>
-    <div class="">
-        <form method="post" novalidate>
-            {% csrf_token %}
-            {% include 'includes/form.html' %}
-            <button type="submit" class="btn btn-success">Save</button>
-        </form>
+    <div class="row" >
+        <div class="col-md-2"></div>
+        <div class="col">
+        <br>
+        <h1>Create New Client</h1>
+        <hr>
+        <div class="">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {% include 'includes/form.html' %}
+                <button type="submit" class="btn btn-success">Save client</button><br><br>
+            </form>
+        </div>
+        </div>
+        <div class="col-md-2"></div>
     </div>
 </div>
 {% endblock mainContent %}

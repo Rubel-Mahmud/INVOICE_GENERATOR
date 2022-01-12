@@ -1,157 +1,29 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
     {{ block.super }} - New Invoice
 {% endblock title %}
 
 {% block mainContent %}
 <div class="container">
-    <div class="row justify-content-md-center">
-        <div class="col-md-auto" style="background:#ddd;margin-top:13px;margin-right:6px;">
+    <div class="row justify-content-md-center" style="margin-top:30px;">
+        <div class="col-md-auto" style="background:#f1f1f1; margin-right:6px; padding:20px 20px;">
+            <h2>New Invoice</h2>
             <form method="POST" novalidate>
                 {% csrf_token %}
-                <table>
-                    <thead>
-                        <h1 class="mt-4">New Invoice</h1>
-                    </thead>
-                    <tfoot>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td></td>
-                                <td>
-                                    &nbsp;&nbsp;
-                                    <button type="submit" name="invoiceSubmitButton" class="btn btn-success">Save Invoice</button>
-                                </td>
-                            </tr>
-                        </div>
-                    </tfoot>
-                    <tbody>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ invform.number.id_for_label }}">Invoice Number</label></td>
-                                <td>&nbsp;:&nbsp;{{ invform.number }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ invform.number.errors }}</td>
-                            </tr>
-                        </div>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ invform.invoiceTitle.id_for_label }}">Invoice Title</label></td>
-                                <td>&nbsp;:&nbsp;{{ invform.invoiceTitle }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ invform.invoiceTitle.errors }}</td>
-                            </tr>
-                        </div>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ invform.dueDate.id_for_label }}">Due Date</label></td>
-                                <td>&nbsp;:&nbsp;{{ invform.dueDate }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ invform.dueDate.errors }}</td>
-                            </tr>
-                        </div>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ invform.paymentStatus.id_for_label }}">Payment Status</label></td>
-                                <td>&nbsp;:&nbsp;{{ invform.paymentStatus }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ invform.paymentStatus.errors }}</td>
-                            </tr>
-                        </div>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ invform.client.id_for_label }}">Client</label></td>
-                                <td>&nbsp;:&nbsp;{{ invform.client }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ invform.client.errors }}</td>
-                            </tr>
-                        </div>
-                    </tbody>
-                </table>
+                {{ invform|crispy }}<br>
+                <button type="submit" class="btn btn-success">Save Invoice</button>
             </form>
         </div>
 <!--Product form-->
-        <div class="col-md-auto" style="background:#ddd;margin-top:13px;margin-left:6px;padding-bottom:12px;">
+        <div class="col-md-auto" style="background:#f1f1f1;margin-right:6px; padding:20px 20px;">
+            <h2>Add Product To Invoice</h2>
             <form method="POST" novalidate>
                 {% csrf_token %}
-                <table>
-                    <thead>
-                        <h1 class="mt-4">Add Product To Invoice</h1>
-                    </thead>
-                    <tfoot>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td></td>
-                                <td>
-                                    &nbsp;&nbsp;
-                                    <button type="submit" name="productSubmitButton" class="btn btn-success">Add Product</button>
-                                </td>
-                            </tr>
-                        </div>
-                    </tfoot>
-                    <tbody>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ prdform.productTitle.id_for_label }}">Product Title</label></td>
-                                <td>&nbsp;:&nbsp;{{ prdform.productTitle }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ prdform.productTitle.errors }}</td>
-                            </tr>
-                        </div>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ prdform.description.id_for_label }}">Description</label></td>
-                                <td>&nbsp;:&nbsp;{{ prdform.description }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ prdform.description.errors }}</td>
-                            </tr>
-                        </div>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ prdform.quantity.id_for_label }}">Quantity</label></td>
-                                <td>&nbsp;:&nbsp;{{ prdform.quantity }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ prdform.quantity.errors }}</td>
-                            </tr>
-                        </div>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ prdform.price.id_for_label }}">Price</label></td>
-                                <td>&nbsp;:&nbsp;{{ prdform.price }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ prdform.price.errors }}</td>
-                            </tr>
-                        </div>
-                        <div class="fieldWrapper">
-                            <tr>
-                                <td><label for="{{ prdform.currency.id_for_label }}">Currency</label></td>
-                                <td>&nbsp;:&nbsp;{{ prdform.currency }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>{{ prdform.currency.errors }}</td>
-                            </tr>
-                        </div>
-                    </tbody>
-                </table>
+                {{ prdform|crispy }}<br>
+                <button type="submit" class="btn btn-success">Add product</button>
             </form>
         </div>
     </div>
