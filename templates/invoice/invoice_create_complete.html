@@ -11,19 +11,19 @@
     <div class="row justify-content-md-center" style="margin-top:30px;">
         <div class="col-md-auto" style="background:#f1f1f1; margin-right:6px; padding:20px 20px;">
             <h2>New Invoice</h2>
-            <form method="POST" novalidate>
+            <form method="POST">
                 {% csrf_token %}
                 {{ invform|crispy }}<br>
-                <button type="submit" class="btn btn-success">Save Invoice</button>
+                <button type="submit" name="invoiceSubmitButton" class="btn btn-success">Save Invoice</button>
             </form>
         </div>
 <!--Product form-->
         <div class="col-md-auto" style="background:#f1f1f1;margin-right:6px; padding:20px 20px;">
             <h2>Add Product To Invoice</h2>
-            <form method="POST" novalidate>
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ prdform|crispy }}<br>
-                <button type="submit" class="btn btn-success">Add product</button>
+                <button type="submit" name="productSubmitButton" class="btn btn-success">Add product</button>
             </form>
         </div>
     </div>

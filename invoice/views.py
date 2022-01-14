@@ -28,10 +28,11 @@ def clients(request):
     return render(request, 'invoice/clients.html', context=context)
 
 
+
 def createClient(request):
     context = {}
     if request.method == "POST":
-        form = ClientCreationForm(request.POST)
+        form = ClientCreationForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('clients')
@@ -41,7 +42,6 @@ def createClient(request):
     return render(request, 'invoice/create_client.html', context=context)
 
 
-
 def clientSearch(request):
     queryset = {}
     if request.method == "POST":
@@ -49,6 +49,12 @@ def clientSearch(request):
         clients = Client.objects.filter(name__contains=inputData)
         if bool(clients) == False :
             clients = Client.objects.filter(addressLine1__contains=inputData)
+        if bool(clients) == False :
+            clients = Client.objects.filter(postalCode__contains=inputData)
+        if bool(clients) == False :
+            clients = Client.objects.filter(phoneNumber__contains=inputData)
+        if bool(clients) == False :
+            clients = Client.objects.filter(email__contains=inputData)
         queryset['clients'] = clients
     else:
         clients = Client.objects.all()
@@ -113,7 +119,7 @@ def createInvoiceComplete(request, slug):
 
     if request.method == 'POST':
         invform = InvoiceCreationForm(request.POST, instance=invoice)
-        prdform = ProductCreationForm(request.POST)
+        prdform = ProductCreationForm(request.POST, request.FILES)
 
         if 'productSubmitButton' in request.POST and prdform.is_valid():
             product = prdform.save(commit=False)
@@ -193,3 +199,8 @@ def createPDF(request):
 
     #Return
     return response
+
+
+
+def formTest(request):
+    render(request, 'invoice/test_form_submit.html')

@@ -7,10 +7,15 @@ class DateInput(forms.DateInput):
 
 
 class ClientCreationForm(forms.ModelForm):
+    clientLogo = forms.ImageField()
 
     class Meta:
         model = Client
-        fields = ('name', 'addressLine1', 'postalCode', 'province', 'phoneNumber', 'email')
+        fields = ('name', 'addressLine1', 'postalCode', 'province', 'phoneNumber', 'email', 'clientLogo')
+        widgets = {
+            "clientLogo": forms.ClearableFileInput(
+            ),
+        }
 
 
 class InvoiceCreationForm(forms.ModelForm):
@@ -25,11 +30,15 @@ class InvoiceCreationForm(forms.ModelForm):
 
 
 class ProductCreationForm(forms.ModelForm):
-    description = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 5, 'placeholder': 'Products Description'}),
-        max_length=4000
-    )
+
 
     class Meta:
         model = Product
-        fields = ('productTitle', 'description', 'quantity', 'price', 'currency')
+        fields = ('productTitle', 'description', 'quantity', 'price', 'currency', 'image')
+        widgets = {
+            'description':forms.Textarea(
+                attrs={
+                    'rows':5,
+                }
+            )
+        }

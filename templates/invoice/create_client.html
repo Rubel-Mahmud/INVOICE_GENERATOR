@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
     {{ block.super }} - New Client
 {% endblock title %}
@@ -14,9 +16,9 @@
         <h1>Create New Client</h1>
         <hr>
         <div class="">
-            <form method="post" novalidate>
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% include 'includes/form.html' %}
+                {{ form|crispy }}<br>
                 <button type="submit" class="btn btn-success">Save client</button><br><br>
             </form>
         </div>

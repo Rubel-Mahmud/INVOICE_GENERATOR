@@ -10,16 +10,16 @@ class Client(models.Model):
         ('DINAJPUR', 'Dinajpur'),
     ]
 
-    name = models.CharField(max_length=200, null=True, blank=True, verbose_name='Name')
-    addressLine1 = models.CharField(max_length=200, null=True, blank=True, verbose_name='Address')
-    postalCode = models.CharField(max_length=20, null=True, blank=True, verbose_name='Postal code')
-    province = models.CharField(max_length=100, choices=provinces, null=True, blank=True, verbose_name='Province')
-    phoneNumber = models.CharField(max_length=100, null=True, blank=True, verbose_name='Phone number')
-    email = models.EmailField(max_length=200, null=True, blank=True, verbose_name='Email')
-    clientLogo = models.ImageField(upload_to='clientLogos/', null=True, verbose_name='Photo')
+    name = models.CharField(max_length=200, verbose_name='Name')
+    addressLine1 = models.CharField(max_length=200, verbose_name='Address')
+    postalCode = models.CharField(max_length=20, verbose_name='Postal code')
+    province = models.CharField(max_length=100, choices=provinces, verbose_name='Province')
+    phoneNumber = models.CharField(max_length=100, verbose_name='Phone number')
+    email = models.EmailField(max_length=200, verbose_name='Email')
+    clientLogo = models.ImageField(upload_to='clientLogos/', verbose_name='Photo')
 
     # Utility fields
-    created_at = models.DateTimeField(null=True, blank=True, verbose_name='Created at')
+    created_at = models.DateTimeField(auto_now_add=timezone.now(), verbose_name='Created at')
 
 
     def __str__(self):
@@ -76,19 +76,19 @@ class Product(models.Model):
         ('EUR', 'Eur'),
     ]
 
-    productTitle = models.CharField(max_length=200, default='Product Title', null=True, blank=True, verbose_name='Product name')
-    description = models.TextField(max_length=4000, default='Product descriptions..', null=True, blank=True, verbose_name='Product description')
-    quantity = models.CharField(max_length=200, default=0, null=True, blank=True, verbose_name='Quantity')
-    price = models.CharField(max_length=200, default=0, null=True, blank=True, verbose_name='Price')
-    currency = models.CharField(choices=currency, default='TK', max_length=20, null=True, blank=True, verbose_name='Currency')
-    image = models.ImageField(upload_to='clientLogos/', null=True, blank=True, verbose_name='Product image')
+    productTitle = models.CharField(max_length=200, default='Product Title', verbose_name='Product name')
+    description = models.TextField(max_length=4000, default='Product descriptions..', verbose_name='Description')
+    quantity = models.CharField(max_length=200, default=0, verbose_name='Quantity')
+    price = models.CharField(max_length=200, default=0, verbose_name='Price')
+    currency = models.CharField(choices=currency, default='TK', max_length=20, verbose_name='Currency')
+    image = models.ImageField(upload_to='clientLogos/', verbose_name='Product image')
 
     # Related Fields
-    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, null=True, related_name='products', verbose_name='Invoice')
+    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name='products', verbose_name='Invoice')
 
     # Utility Fields
-    uniqueId = models.CharField(max_length=200, null=True, blank=True, verbose_name='Product id')
-    created_at = models.DateTimeField(null=True, blank=True, verbose_name='Created at')
+    uniqueId = models.CharField(max_length=200, verbose_name='Product id')
+    created_at = models.DateTimeField(verbose_name='Created at')
 
     def __str__(self):
         return "{} : {}{}".format(self.productTitle, self.price, self.currency)
