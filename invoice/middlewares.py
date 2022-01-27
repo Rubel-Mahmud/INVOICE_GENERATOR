@@ -50,20 +50,3 @@ from django.shortcuts import redirect, HttpResponse
 #
 #     return return_value_function
 
-
-
-# This middleware will check the authenticated users
-def authenticated_user_detector_middleware(get_response):
-
-    def authenticated_user_detector_function(request):
-        # Code before the view
-        if request.user.is_authenticated:
-            return
-        else:
-            return HttpResponse('<h1>Please Login Before Visit The Site. Thank You !</h1>')
-        response = get_response(request)
-        # Code after the view
-
-        return response
-
-    return authenticated_user_detector_function
