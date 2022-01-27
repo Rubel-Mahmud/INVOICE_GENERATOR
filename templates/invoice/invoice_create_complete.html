@@ -90,8 +90,8 @@
             <div class="col-2"></div>
             <div class="col-md-auto">
                 <a href="{% url 'invoice_template' invoice.uniqueId %}"><button type="button" class="btn btn-primary">View Invoice TEMPLATE</button></a>
-                <a href="{% url 'pdf' %}"><button type="button" class="btn btn-success">View Invoice PDF</button></a>
-                <a href="#"><button type="button" class="btn btn-warning">Sent Invoice EMAIL</button></a>
+                <a href="{% url 'pdf' invoice.uniqueId %}"><button type="button" class="btn btn-success">View Invoice PDF</button></a>
+                <a href="{% url 'send_email' invoice.uniqueId %}"><button type="button" class="btn btn-warning">Sent Invoice EMAIL</button></a>
             </div>
             <div class="col-2"></div>
         </div>

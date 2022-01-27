@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 
 {% block mainContent %}
-<h2>Test Form Submit</h2>
+<div class="container">
+    <br>
+    <h2>Test Form Submit</h2><br>
+    <div class="row">
+        <div class="col">
+            <!--paid invoice-->
+            <form method="POST">{% csrf_token %}
+                <button type="submit" name="paid">paid invoice</button>
+            </form>
+        </div>
+        <div class="col">
+            <!--Unpaid invoice-->
+            <form method="POST">{% csrf_token %}
+                <button type="submit" name="unpaid">paid invoice</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    {% if message %}
+    <span class="text-danger">{{ message }}</span>
+    {% endif %}
+</div>
 {% endblock mainContent %}

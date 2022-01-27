@@ -97,3 +97,34 @@ class Product(models.Model):
         if self.created_at == None:
             self.created_at = timezone.now()
         super(Product, self).save(*args, **kwargs)
+
+
+
+class Company(models.Model):
+
+    provinces = [
+        ('RANGPUR', 'Rangpur'),
+        ('DHAKA', 'Dhaka'),
+        ('DINAJPUR', 'Dinajpur'),
+    ]
+
+    name = models.CharField(max_length=200, verbose_name='Company')
+    addressLine = models.CharField(max_length=400, verbose_name='Address')
+    postalCode = models.CharField(max_length=20, verbose_name='Postal Code')
+    province = models.CharField(max_length=100, choices=provinces, verbose_name='Province')
+    phoneNumber = models.CharField(max_length=100, verbose_name='Phone number')
+    email = models.EmailField(max_length=200, verbose_name='Email')
+    clientLogo = models.ImageField(upload_to='clientLogos/', verbose_name='Photo')
+
+    # Utility fields
+    created_at = models.DateTimeField(auto_now_add=timezone.now(), verbose_name='Created at')
+
+
+    def __str__(self):
+        return "{} - {}".format(self.name, self.province)
+
+
+    def save(self, *args, **kwargs):
+        if self.created_at == None:
+            self.created_at = timezone.now()
+        super(Company, self).save(*args, **kwargs)
