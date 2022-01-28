@@ -17,10 +17,5 @@ db.sqlite3
 #/static/
 
 # media folder at project root
-media/**
+/media
 
-media/clientLogos
-
-media/clientLogos/
-
-/git_test
