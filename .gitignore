@@ -18,3 +18,7 @@ db.sqlite3
 
 # media folder at project root
 media/**
+
+media/clientLogos
+
+media/clientLogos/
